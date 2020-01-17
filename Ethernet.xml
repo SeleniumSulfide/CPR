@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<LANProfile xmlns="http://www.microsoft.com/networking/LAN/profile/v1">
+	<MSM>
+		<security>
+			<OneXEnforced>true</OneXEnforced>
+			<OneXEnabled>true</OneXEnabled>
+			<OneX xmlns="http://www.microsoft.com/networking/OneX/v1">
+				<cacheUserData>true</cacheUserData>
+				<authMode>machine</authMode>
+				<EAPConfig><EapHostConfig xmlns="http://www.microsoft.com/provisioning/EapHostConfig"><EapMethod><Type xmlns="http://www.microsoft.com/provisioning/EapCommon">13</Type><VendorId xmlns="http://www.microsoft.com/provisioning/EapCommon">0</VendorId><VendorType xmlns="http://www.microsoft.com/provisioning/EapCommon">0</VendorType><AuthorId xmlns="http://www.microsoft.com/provisioning/EapCommon">0</AuthorId></EapMethod><Config xmlns="http://www.microsoft.com/provisioning/EapHostConfig"><Eap xmlns="http://www.microsoft.com/provisioning/BaseEapConnectionPropertiesV1"><Type>13</Type><EapType xmlns="http://www.microsoft.com/provisioning/EapTlsConnectionPropertiesV1"><CredentialsSource><CertificateStore><SimpleCertSelection>true</SimpleCertSelection></CertificateStore></CredentialsSource><ServerValidation><DisableUserPromptForServerValidation>false</DisableUserPromptForServerValidation><ServerNames>wpv-ise-ps1.fhlbi.com;wpv-ise-ps2.fhlbi.com</ServerNames><TrustedRootCA>b5 5b c1 c1 4f d1 22 20 ea ec e4 21 90 8c ad e7 85 b4 5a 5d </TrustedRootCA><TrustedRootCA>27 96 ba e6 3f 18 01 e2 77 26 1b a0 d7 77 70 02 8f 20 ee e4 </TrustedRootCA><TrustedRootCA>47 be ab c9 22 ea e8 0e 78 78 34 62 a7 9f 45 c2 54 fd e6 8b </TrustedRootCA></ServerValidation><DifferentUsername>false</DifferentUsername><PerformServerValidation xmlns="http://www.microsoft.com/provisioning/EapTlsConnectionPropertiesV2">true</PerformServerValidation><AcceptServerName xmlns="http://www.microsoft.com/provisioning/EapTlsConnectionPropertiesV2">true</AcceptServerName><TLSExtensions xmlns="http://www.microsoft.com/provisioning/EapTlsConnectionPropertiesV2"><FilteringInfo xmlns="http://www.microsoft.com/provisioning/EapTlsConnectionPropertiesV3"><CAHashList Enabled="true"><IssuerHash>b5 5b c1 c1 4f d1 22 20 ea ec e4 21 90 8c ad e7 85 b4 5a 5d </IssuerHash><IssuerHash>68 2c 1a 5c bf e7 6a 93 e2 f2 7f ed 54 6a ee 60 49 46 34 20 </IssuerHash></CAHashList></FilteringInfo></TLSExtensions></EapType></Eap></Config></EapHostConfig></EAPConfig>
+			</OneX>
+		</security>
+	</MSM>
+</LANProfile>
