@@ -2,7 +2,7 @@
 <LANProfile xmlns="http://www.microsoft.com/networking/LAN/profile/v1">
 	<MSM>
 		<security>
-			<OneXEnforced>true</OneXEnforced>
+			<OneXEnforced>false</OneXEnforced>
 			<OneXEnabled>true</OneXEnabled>
 			<OneX xmlns="http://www.microsoft.com/networking/OneX/v1">
 				<cacheUserData>true</cacheUserData>
