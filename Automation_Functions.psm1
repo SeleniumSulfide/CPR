@@ -167,7 +167,6 @@ function Send-CtrlAltDel
     Send-VMKeys -VM $VM -LeftControl $True -LeftAlt $True -SpecialKeyInput "DEL"
 }
 
-
 function Start-CMD
 {
     param
@@ -324,15 +323,16 @@ function Get-Updates
     #$Session = New-Object -ComObject Microsoft.Update.Session
                
     $Searcher = $Session.CreateUpdateSearcher()
+    
     if (!($Drivers))
     {
-        add-content $logfile "Searching for Windows Updates"
+        Set-VMStatus -Status "Searching for Windows Updates"
         #$searcher.serviceid = '9482f4b4-e343-43b6-b170-9a65bc822c77'
         $Criteria = "IsInstalled=0"
     }
     else
     {
-        add-content $logfile "Searching for Driver Updates"
+        Set-VMStatus -Status "Searching for Driver Updates"
         $Searcher.ServiceID = '7971f918-a847-4430-9279-4a52d1efe18d'
         $Searcher.SearchScope =  1 # MachineOnly
         $Searcher.ServerSelection = 3 # Third Party
@@ -347,21 +347,33 @@ function Get-Updates
 
 function Sync-Updates
 {
-    Param(
+    Param
+    (
         [Parameter()]$Updates,
         [Parameter()]$Session,
-        [Parameter()]$logFile)
+        [Parameter()]$logFile
+    )
 
-    add-content $logfile "Creating list of updates to download"
+    $Downloader = $Session.CreateUpdateDownloader()
+    $Updates | ForEach-Object
+    {
+        $i++
+        Set-VMStatus -Status "Downloading $i of $($Updates.Count()): $($_.Title)"
+        $UpdatesToDownload = New-Object -Com Microsoft.Update.UpdateColl
+        $updatesToDownload.Add($_)
+        $Downloader.Updates = $UpdatesToDownload
+        $Downloader.Download()
+    }
+    <#
+    Set-VMStatus -Status "Creating list of updates to download"
     $UpdatesToDownload = New-Object -Com Microsoft.Update.UpdateColl
-    $updates | ForEach-Object { $UpdatesToDownload.Add($_) | out-null }
-    
-    add-content $logfile "Creating Update Download"
+    $Updates | ForEach-Object { $UpdatesToDownload.Add($_) | out-null }
     $Downloader = $Session.CreateUpdateDownloader()
     $Downloader.Updates = $UpdatesToDownload
     
-    add-content $logfile "Downloading Updates"
+    Set-VMStatus "Downloading Updates: $(UpdatesToDownload.count())"
     $Downloader.Download() | out-file $logFile -Append
+    #>
 }
 
 function Install-Updates
